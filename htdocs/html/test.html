@@ -22,7 +22,7 @@ $(function() {
     $("#datepicker").datepicker({
         // 日付が選択された時、日付をテキストフィールドへセット
         onSelect: function(dateText, inst) {
-                    $("#date_val").val(dateText);
+                    document.getElementById("date_val").value += dateText + "\n";
                 }
     });
 });
@@ -40,7 +40,7 @@ $(function() {
 <h2 id="heading2">イベント</h2>
 <p>
 <label for="event">乙彼ちゃん。社畜ども</label><br>
-<textare id="event" name="event" cols="40" rows="4" maxlength="20" placeholder="情報入力してください"></textarea>
+<textarea id="event" name="event" cols="40" rows="4" maxlength="20" placeholder="情報入力してください"></textarea>
 </p>
 
 <h2 id="heading2">日時</h2>
@@ -51,7 +51,7 @@ $(function() {
 
 <div id="datepicker"/>
 <br/>
-<p>Date: <input type="text" id="date_val"/></p>
+<p>Date: <textarea name="date_val" cols="40" rows="4" maxlength="20"  id="date_val"/></textarea></p>
 </div>
 
 <! javascript カレンダー>
