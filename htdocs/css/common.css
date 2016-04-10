@@ -441,9 +441,48 @@ float: right;
 	top:0;
 }
 
+
+/* calender -------------------------------------------------- */
 .submenu {
 	background: #00599b;
 	visibility: hidden;
 	position: absolute;
 	left: 0px;
 }
+
+.d1 {
+    border-collapse:collapse;
+    text-align:center;
+    margin:0 0 0 25px;
+    width:250px;
+    }
+.d1 td {
+    border:solid 1px #ccc;
+    height:22px;
+    }
+.d2 td {
+    font-weight:bold;
+    font-size:18px;
+    color:#0395e1;
+    border:none;
+    }
+.d3,.d3a {
+    color:#f00;
+    }
+.d3 {
+    background:#fee;
+    }
+.d4,.d4a {
+    color:#00f;
+    }
+.d4 {
+    background:#eef;
+    }
+.d5 {
+    background:#ff8;
+    font-weight:bold;
+    }
+.d6 {
+    font-weight:bold;
+    background:#efe;
+    }
