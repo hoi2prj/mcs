@@ -13,12 +13,9 @@
 		// SQLの実行
 		$res = mysql_query($sql,$con);
 
-		// データの取り出し
-		$item = mysql_fetch_array($res);
-
 		// 接続をクローズ
 		mysql_close($con);
 
-		return $item;
+		return $res;
 	}
 ?>

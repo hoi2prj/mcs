@@ -1,7 +1,7 @@
 <?php
-  require "./send_sql.php";
+  require_once("./send_sql.php");
   $sql = "select * from table1";
-  $item = send_sql($sql);
+  $res = send_sql($sql);
 ?>
 
 <html>
@@ -11,9 +11,9 @@
 </head>
 <body>
   <<?php
-    foreach ($item as $key => $val) {
-      print $key." ".$val"<br>";
-    }
+  while ($item = mysql_fetch_array($res)) {
+		print $item[0]." ".$item[1]."<br>";
+	}
   ?>
 </body>
 </html>
