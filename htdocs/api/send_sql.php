@@ -4,7 +4,7 @@
 		$con = mysql_connect("localhost","root","") or die("接続失敗");
 
 		// データベースを選択
-		mysql_select_db('test',$con) or die("DBがありません");
+		mysql_select_db('ccdb',$con) or die("DBがありません");
 
 		// 文字化け防止のおまじない
 		$strsql = "SET CHARACTER SET UTF8";

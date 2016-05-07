@@ -1,6 +1,6 @@
 <?php
   require_once("./send_sql.php");
-  $sql = "select * from table1";
+  $sql = "select * from event";
   $res = send_sql($sql);
 ?>
 
@@ -10,7 +10,7 @@
 <title>PHPtest</title>
 </head>
 <body>
-  <<?php
+  <?php
   while ($item = mysql_fetch_array($res)) {
 		print $item[0]." ".$item[1]."<br>";
 	}
