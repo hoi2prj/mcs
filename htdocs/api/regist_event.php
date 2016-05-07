@@ -1,7 +1,13 @@
 <?php
+  //DB関連
   require_once("./send_sql.php");
   $sql = "select * from event";
   $res = send_sql($sql);
+
+  //POSTデータ処理
+  if ($_SERVER['REQUEST_METHOD']==='POST'){
+    $event = $_POST['event'];
+  }
 ?>
 
 <html>
@@ -14,6 +20,7 @@
   while ($item = mysql_fetch_array($res)) {
 		print $item[0]." ".$item[1]."<br>";
 	}
+  echo $event;
   ?>
 </body>
 </html>

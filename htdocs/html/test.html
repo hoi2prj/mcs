@@ -40,6 +40,7 @@ $(function() {
 <h2 id="heading2">イベント</h2>
 <p>
 <label for="event">乙彼ちゃん。社畜ども</label><br>
+<form action="../api/regist_event.php" method="post">
 <textarea id="event" name="event" cols="40" rows="4" maxlength="20" placeholder="情報入力してください"></textarea>
 </p>
 
@@ -64,9 +65,13 @@ $(function() {
 
 
 <h2 id="heading2">コメント</h2>
-<textarea id="place" name="place" cols="40" rows="4" maxlength="30" placeholder="コメントおね！"></textarea>
+<textarea id="place" name="comment" cols="40" rows="4" maxlength="30" placeholder="コメントおね！"></textarea>
 </p>
 
+<p>
+  <input type="submit">
+</p>
+</form>
 
 </div><!-- end main -->
 
