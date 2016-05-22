@@ -1,13 +1,21 @@
 <?php
-  //DB関連
-  require_once("./send_sql.php");
-  $sql = "select * from event";
-  $res = send_sql($sql);
-
   //POSTデータ処理
   if ($_SERVER['REQUEST_METHOD']==='POST'){
-    $event = $_POST['event'];
+    $event_name = $_POST['event_name'];
+    $place = $_POST['place'];
+    $comment = $_POST['comment'];
+    $item = $_POST['item']　//ここだけテーブルが違う
   }
+
+  //DB関連
+  require_once("./send_sql.php");
+  $sql_event = "INSERT INTO ccdb.event(event_name, place, comment)
+          VALUES($event_name, $place, $comment)"
+  $res_event = send_sql($sql_event);
+
+  $sql_candi = "INSERT INTO ccdb.candi(item)
+          VALUES($item)"
+  $res_candi = send_sql($sql_candi);
 ?>
 
 <html>
@@ -17,8 +25,8 @@
 </head>
 <body>
   <?php
-  while ($item = mysql_fetch_array($res)) {
-		print $item[0]." ".$item[1]."<br>";
+  while ($test_event = mysql_fetch_array($res_event)) {
+		print $test_event[0]." ".$test_event[1]."<br>";
 	}
   echo $event;
   ?>

@@ -1,7 +1,7 @@
 <?php
 	function send_sql($sql) {
 		// サーバ接続
-		$con = mysql_connect("localhost","root","") or die("接続失敗");
+		$con = mysql_connect("127.0.0.1","root","") or die("接続失敗");
 
 		// データベースを選択
 		mysql_select_db('ccdb',$con) or die("DBがありません");
