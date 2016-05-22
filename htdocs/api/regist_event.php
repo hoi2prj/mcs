@@ -6,15 +6,14 @@
     $comment = $_POST['comment'];
     $item = $_POST['item'];　//ここだけテーブルが違う
   }
-
   //DB関連
   require_once("./send_sql.php");
   $sql_event = "INSERT INTO ccdb.event(event_name, place, comment)
-          VALUES($event_name, $place, $comment)"
+          VALUES($event_name, $place, $comment)";
   $res_event = send_sql($sql_event);
 
   $sql_candi = "INSERT INTO ccdb.candi(item)
-          VALUES($item)"
+          VALUES($item)";
   $res_candi = send_sql($sql_candi);
 ?>
 
