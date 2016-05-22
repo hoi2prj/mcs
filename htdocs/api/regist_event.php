@@ -4,7 +4,7 @@
     $event_name = $_POST['event_name'];
     $place = $_POST['place'];
     $comment = $_POST['comment'];
-    $item = $_POST['item'];　//ここだけテーブルが違う
+    $item = $_POST['item'];
   }
   //DB関連
   require_once("./send_sql.php");
