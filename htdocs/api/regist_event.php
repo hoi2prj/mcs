@@ -4,7 +4,7 @@
     $event_name = $_POST['event_name'];
     $place = $_POST['place'];
     $comment = $_POST['comment'];
-    $item = $_POST['item']　//ここだけテーブルが違う
+    $item = $_POST['item'];　//ここだけテーブルが違う
   }
 
   //DB関連
@@ -28,7 +28,9 @@
   while ($test_event = mysql_fetch_array($res_event)) {
 		print $test_event[0]." ".$test_event[1]."<br>";
 	}
-  echo $event;
+  echo $event_name;
+
+
   ?>
 </body>
 </html>
