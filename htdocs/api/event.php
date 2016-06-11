@@ -17,7 +17,7 @@
 </head>
 <body>
   <?php
-  while ($event = mysql_fetch_array($res_event) {
+  while ($event = mysql_fetch_array($res_event)) {
 		print $event['event_name']." ".$event['comment']."<br>";
 	}
   ?>
