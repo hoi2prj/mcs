@@ -1,13 +1,27 @@
 <?php
+$event_name = '';
+$place = '';
+$comment = '';
   //POSTデータ処理
   if ($_SERVER['REQUEST_METHOD']==='GET'){
     $event_id = $_GET['id'];
-}
+  }
   //DB関連
   require_once("./send_sql.php");
   $sql_event = "SELECT * FROM event WHERE event_id = $event_id";
   $res_event = send_sql($sql_event);
-?>
+  if ($res_event != FALSE){
+    while ($event = mysql_fetch_array($res_event)) {
+      $event_name = $event['event_name'];
+      $place = $event['place'];
+      $comment = $event['comment'];
+      //日時を取り出す処理も今後必要
+      //$party_prop =$event['party_prop']
+    }
+  } else {
+    die('query error' . mysql_error());
+  }
+  ?>
 
 
 <!DOCTYPE html>
@@ -36,36 +50,27 @@
 
 <h2 id="heading2">イベント</h2>
 <p>
-<label for="event">乙彼ちゃん。社畜ども</label><br>
   <?php
-  while ($event = mysql_fetch_array($res_event)) {
-    print $event['event_name'];
-  }
+    print $event_name;
   ?>
 </p>
 
 <h2 id="heading2">日時</h2>
 <div id="datepicker"/>
 </div>
-
-
+<!-- ここに日時をプリントするphp入れる -->
 
 <h2 id="heading2">場所</h2>
 <p>
-<label for="place">場所だお</label><br>
   <?php
-  while ($event = mysql_fetch_array($res_event)) {
-    print $event['place'];
-  }
+  print $place;
   ?>
 </p>
 
 <p>
 <h2 id="heading2">コメント</h2>
   <?php
-  while ($event = mysql_fetch_array($res_event)) {
-    print $event['comment'];
-  }
+  print $comment;
   ?>
 </p>
 
