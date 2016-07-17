@@ -10,11 +10,18 @@
   require_once("./send_sql.php");
   $sql_event = "INSERT INTO ccdb.event(event_name, place, comment)
           VALUES($event_name, $place, $comment)";
-  $res_event = send_sql($sql_event);
 
   $sql_candi = "INSERT INTO ccdb.candi(item)
           VALUES($item)";
-  $res_candi = send_sql($sql_candi);
+
+  $res_event = "";
+  $res_candi = "";
+  try {
+    $res_event = send_sql($sql_event);
+    $res_candi = send_sql($sql_candi);
+  } catch (Exception $e) {
+    throw new Exception($e->getMessage());
+  }
 ?>
 
 <html>
