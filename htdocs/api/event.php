@@ -19,13 +19,13 @@ $event_id = '';
   $res_event = $db->SendSql($sql_event);
 
   if ($res_event != FALSE){
-    while ($event = mysql_fetch_array($db->resultData)) {
-      $event_name = $event['event_name'];
-      $place = $event['place'];
-      $comment = $event['comment'];
-      //日時を取り出す処理も今後必要
-      //$party_prop =$event['party_prop']
-    }
+      while ($event = $res_event->fetch_assoc()) {
+        $event_name = $event['event_name'];
+        $place = $event['place'];
+        $comment = $event['comment'];
+        //日時を取り出す処理も今後必要
+        //$party_prop =$event['party_prop']
+      }
   } else {
     die('query error');
   }

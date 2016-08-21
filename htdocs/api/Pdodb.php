@@ -1,31 +1,44 @@
 <?php
 	class Pdodb {
 		// 実行結果
-		public $resultData;
+		public $resultData = null;
 		// エラーメッセージ
-		public $ErrorMessage;
+		public $ErrorMessage = null;
 
 		function SendSql($sql) {
 			try {
 				error_log("SQL入力: ".$sql);
 
-				// サーバ接続
-				$con = mysql_connect("127.0.0.1","root","");
-				// データベースを選択
-				mysql_select_db('ccdb',$con);
+				$mysqli = new mysqli("127.0.0.1","root","");
 
-				// 文字化け防止のおまじない
-				$strsql = "SET CHARACTER SET UTF8";
-				mysql_query($strsql,$con);
+ 				if ($mysqli -> connect_errno) {
+		 			echo $mysqli -> connect_error;
+		 			exit();
+ 				}
 
-				// SQLの実行
-				$resultData = mysql_query($sql,$con);
-				error_log("SQL出力: ".var_dump($resultData));
+ 				$mysqli -> select_db('ccdb');
+ 				$mysqli -> set_charset("utf-8");
+ 				$mysqli -> query("set names utf8");
 
-				// 接続をクローズ
-				mysql_close($con);
+ 				$resultData = $mysqli -> query($sql) or die("error");
+				ob_start();
+				var_dump($resultData);
+				error_log("SQL出力: ".ob_get_clean());
 
-				return TRUE;
+ 				if (!$resultData) {
+		 			$mysqli -> close();
+		 			return FALSE;
+ 				}
+/*
+ 				$resultData = array();
+ 				while ($row = $result -> fetch_assoc()) {
+		 			array_push($resultData, $row);
+ 				}
+*/
+ 				//$result -> free();
+ 				$mysqli -> close();
+
+				return $resultData;
 			} catch (Exception $e) {
 				$ErrorMessage = $e->getMessage();
 				error_log($e->getMessage());
