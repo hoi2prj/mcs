@@ -2,16 +2,24 @@
 $event_name = '';
 $place = '';
 $comment = '';
+$event_id = '';
+
   //POSTデータ処理
   if ($_SERVER['REQUEST_METHOD']==='GET'){
     $event_id = $_GET['id'];
   }
   //DB関連
-  require_once("./send_sql.php");
+  require_once("./Pdodb.php");
   $sql_event = "SELECT * FROM event WHERE event_id = $event_id";
-  $res_event = send_sql($sql_event);
+
+  //インスタンス生成
+  $db = new Pdodb();
+
+  //イベントデータ参照
+  $res_event = $db->SendSql($sql_event);
+
   if ($res_event != FALSE){
-    while ($event = mysql_fetch_array($res_event)) {
+    while ($event = mysql_fetch_array($db->resultData)) {
       $event_name = $event['event_name'];
       $place = $event['place'];
       $comment = $event['comment'];
@@ -19,7 +27,7 @@ $comment = '';
       //$party_prop =$event['party_prop']
     }
   } else {
-    die('query error' . mysql_error());
+    die('query error');
   }
   ?>
 

@@ -7,36 +7,19 @@
     $item = $_POST['item'];
   }
   //DB関連
-  require_once("./send_sql.php");
+  require_once("./Pdodb.php");
   $sql_event = "INSERT INTO ccdb.event(event_name, place, comment)
           VALUES($event_name, $place, $comment)";
 
   $sql_candi = "INSERT INTO ccdb.candi(item)
           VALUES($item)";
 
-  $res_event = "";
-  $res_candi = "";
-  try {
-    $res_event = send_sql($sql_event);
-    $res_candi = send_sql($sql_candi);
-  } catch (Exception $e) {
-    throw new Exception($e->getMessage());
-  }
+  //インスタンス生成
+  $db = new Pdodb();
+
+  //イベントデータ挿入
+  $db->SendSql($sql_event);
+
+  //候補データ挿入
+  $db->SendSql($sql_candi);
 ?>
-
-<html>
-<head>
-<meta http-equiv=content-type content="text/html; charset=UTF-8">
-<title>PHPtest</title>
-</head>
-<body>
-  <?php
-  while ($test_event = mysql_fetch_array($res_event)) {
-		print $test_event[0]." ".$test_event[1]."<br>";
-	}
-  echo $event_name;
-
-
-  ?>
-</body>
-</html>

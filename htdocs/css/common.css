@@ -314,7 +314,7 @@ textarea { overflow: auto; }
 input[type=text]:hover, input[type=text]:focus,
 input[type=email]:hover, input[type=email]:focus,
 textarea:hover, textarea:focus {
-	background: #000099;
+	background: #ddddff;
 	border: 2px solid #000099;
 }
 
