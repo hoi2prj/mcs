@@ -20,7 +20,7 @@
  				$mysqli -> set_charset("utf-8");
  				$mysqli -> query("set names utf8");
 
- 				$resultData = $mysqli -> query($sql) or die("error");
+ 				$resultData = $mysqli -> query($sql) or die("SQL_Error: ".mysql_error());
 				ob_start();
 				var_dump($resultData);
 				error_log("SQL出力: ".ob_get_clean());
