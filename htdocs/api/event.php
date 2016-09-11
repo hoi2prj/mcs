@@ -10,7 +10,7 @@ $event_id = '';
   }
   //DB関連
   require_once("./Pdodb.php");
-  $sql_event = "SELECT * FROM event WHERE event_id = $event_id";
+  $sql_event = "SELECT * FROM event WHERE event_id = '$event_id'";
 
   //インスタンス生成
   $db = new Pdodb();
