@@ -269,7 +269,6 @@ h1 {
     position:relative;
     behavior: url(http://html5.imedia-web.net/css/PIE.htc);  /* ie */
 	padding:10px;
-	height:200px;
 }
 
 #footer a {
