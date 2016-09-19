@@ -17,10 +17,13 @@
 
 <script>
 $(function() {
+
   $("#datepicker").datepicker({
-  // 日付が選択された時、日付をテキストフィールドへセット
-  onSelect: function(dateText, inst) {
-      document.getElementById("date_val").value += dateText + "\n";
+    // 日付が選択された時、日付をテキストフィールドへセット
+    onSelect: function(select_data) {
+      var data = $("#date_val").val();
+      data += select_data + " 19:00〜\n";
+      $("#date_val").val(data);
     }
   });
 });
@@ -43,15 +46,11 @@ $(function() {
 
 <h2 id="heading2">日時</h2>
 
-<! javascriptからテキストに値を持ってくる>
-<!<script type="text/javascript" src="../js/test.js" charset="utf-8" async="async"><!/script>
-<!document.フォーム名.テキストボックス名.value>
+<p>
+<textarea name="item" cols="40" rows="4" placeholder="日時を入力してください" id="date_val"/></textarea>
+</p>
 
-<div id="datepicker"/>
-<p><textarea name="item" cols="40" rows="4" maxlength="20" placeholder="日時を入力してください" id="date_val"/></textarea></p>
-</div>
-
-<! javascript カレンダー>
+<div id="datepicker"></div>
 
 <p>
 <h2 id="heading2">場所</h2>
