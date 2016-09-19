@@ -71,6 +71,12 @@ $candi_id = '';
 <h2 id="heading2">日時</h2>
 <table class="tableview">
   <tbody>
+  <tr>
+    <th>候補</th>
+    <th>◯</th>
+    <th>△</th>
+    <th>☓</th>
+  </tr>
 <?php
       //日時データ参照
   $res_candi = $db->SendSql($sql_candi);
