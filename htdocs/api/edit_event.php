@@ -1,39 +1,32 @@
 <?php
-  $event_name = '';
-  $place = '';
-  $comment = '';
-  $event_id = '';
+//DB関連
+require_once("./Pdodb.php");
 
-  //GETデータ処理
-  if ($_SERVER['REQUEST_METHOD']==='GET'){
-    $event_id = $_GET['id'];
-    //DB関連
-    require_once("./Pdodb.php");
-    $sql_event = "SELECT * FROM event WHERE event_id = '$event_id'";
+//インスタンス生成
+$db = new Pdodb();
 
-    //インスタンス生成
-    $db = new Pdodb();
+//GETデータ処理
+if ($_SERVER['REQUEST_METHOD']==='GET'){
+  $event_id = $_GET['id'];
+  $sql_event = "SELECT * FROM candi WHERE event_id = '$event_id'";
 
-    //イベントデータ参照
-    $res_event = $db->SendSql($sql_event);
+  //イベントデータ参照
+  $res_event = $db->SendSql($sql_event);
 
-    if ($res_event != FALSE){
-        while ($event = $res_event->fetch_assoc()) {
-          $event_name = $event['event_name'];
-          $place = $event['place'];
-          $comment = $event['comment'];
-          //日時を取り出す処理も今後必要
-          //$party_prop =$event['party_prop']
-        }
-    } else {
-      die('query error');
-    }
+  if ($res_event == FALSE){
+    die('query error');
   }
-  //POSTデータ処理
-  elseif ($_SERVER['REQUEST_METHOD']==='POST'){
+}
 
-  }
+//POSTデータ処理
+elseif ($_SERVER['REQUEST_METHOD']==='POST'){
+  $event_id = $_POST['event_id'];
 
+
+  $url = './event.php'.'?id='.$event_id;
+  header("Location: {$url}");
+  exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -48,17 +41,15 @@
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
 <![endif]-->
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
-<link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" rel="stylesheet" />
-
 <script>
 $(function() {
+
   $("#datepicker").datepicker({
-  // 日付が選択された時、日付をテキストフィールドへセット
-  onSelect: function(dateText, inst) {
-      document.getElementById("date_val").value += dateText + "\n";
+    // 日付が選択された時、日付をテキストフィールドへセット
+    onSelect: function(select_data) {
+      var data = $("#date_val").val();
+      data += select_data + " 19:00〜\n";
+      $("#date_val").val(data);
     }
   });
 });
@@ -75,21 +66,17 @@ $(function() {
 <div id="main">
 <h2 id="heading2">イベント</h2>
 <p>
-<form action="./edit_event.php" method="post">
+<form action="../api/regist_event.php" method="post">
 <textarea id="event" name="event_name" cols="40" rows="4" maxlength="20" placeholder="イベント名を入力してください"></textarea>
 </p>
 
 <h2 id="heading2">日時</h2>
 
-<! javascriptからテキストに値を持ってくる>
-<!<script type="text/javascript" src="../js/test.js" charset="utf-8" async="async"><!/script>
-<!document.フォーム名.テキストボックス名.value>
+<p>
+<textarea name="item" cols="40" rows="4" placeholder="日時を入力してください" id="date_val"/></textarea>
+</p>
 
-<div id="datepicker"/>
-<p><textarea name="item" cols="40" rows="4" maxlength="20" placeholder="日時を入力してください" id="date_val"/></textarea></p>
-</div>
-
-<! javascript カレンダー>
+<div id="datepicker"></div>
 
 <p>
 <h2 id="heading2">場所</h2>
@@ -102,13 +89,11 @@ $(function() {
 </p>
 
 <p>
-  <input type="submit" value="編集完了">
+  <input type="submit" value="イベント更新">
 </p>
 </form>
 
 </div><!-- end main -->
-
-
 
 </div><!-- end contents -->
 <div class="clear"></div>

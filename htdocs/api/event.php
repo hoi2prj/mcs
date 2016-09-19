@@ -111,6 +111,10 @@ EOM;
 <p>
   <input type="button" value="参加登録" onClick="location.href='./regist_party.php?id=<?php echo $event_id ?>'">
 </p>
+
+<p>
+  <input type="button" value="イベント編集" onClick="location.href='./edit_event.php?id=<?php echo $event_id ?>'">
+</p>
 </form>
 
 </div><!-- end main -->
