@@ -35,7 +35,6 @@ $candi_id = '';
   }
   ?>
 
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -48,7 +47,6 @@ $candi_id = '';
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
 <![endif]-->
 </head>
-
 
 <body>
 
