@@ -113,8 +113,7 @@ EOM;
 <div class="clear"></div>
 
 <footer id="footer">
-<p>Copyright &copy; 2016 <a href="http://html5.imedia-web.net/">調整ちゃん</a> - Design by <a href="http://html5.imedia-web.net/" title="html5入門" target="_blank">html5</a></p>
-<p id="pageTop" class="pageTop"><a href="#page">Let's go to TOP pageeeeee</a></p>
+<p><center>Copyright &copy; 2016 <a href="http://hoi2.club/">調整ちゃん</a></center></p>
 </footer>
 </div><!-- end wrapper -->
 </body>
