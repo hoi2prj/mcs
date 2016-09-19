@@ -25,7 +25,6 @@
     $db->SendSql($sql_candi);
   }
 
-
 //イベント名、場所、コメント処理
     $sql_event = "INSERT INTO ccdb.event(event_name, place, comment,event_id) VALUES('$event_name','$place','$comment','$event_id')";
 
