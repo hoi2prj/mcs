@@ -1,19 +1,25 @@
 <?php
+//イベント系変数の定義
 $event_name = '';
 $place = '';
 $comment = '';
 $event_id = '';
+//candi系変数の定義
+$candi_item ='';
+$candi_id = '';
 
-  //POSTデータ処理
+//GETデータ処理
   if ($_SERVER['REQUEST_METHOD']==='GET'){
     $event_id = $_GET['id'];
   }
-  //DB関連
-  require_once("./Pdodb.php");
-  $sql_event = "SELECT * FROM event WHERE event_id = '$event_id'";
 
-  //インスタンス生成
+//DB関連
+  require_once("./Pdodb.php");
+//インスタンス生成
   $db = new Pdodb();
+
+  $sql_event = "SELECT * FROM event WHERE event_id = '$event_id'";
+  $sql_candi = "SELECT * FROM candi WHERE event_id = '$event_id'";
 
   //イベントデータ参照
   $res_event = $db->SendSql($sql_event);
@@ -23,8 +29,6 @@ $event_id = '';
         $event_name = $event['event_name'];
         $place = $event['place'];
         $comment = $event['comment'];
-        //日時を取り出す処理も今後必要
-        //$party_prop =$event['party_prop']
       }
   } else {
     die('query error');
@@ -63,10 +67,26 @@ $event_id = '';
   ?>
 </p>
 
+<!-- 日時表示 -->
 <h2 id="heading2">日時</h2>
-<div id="datepicker"/>
-</div>
-<!-- ここに日時をプリントするphp入れる -->
+<table class="tableview">
+  <tbody>
+<?php
+      //日時データ参照
+  $res_candi = $db->SendSql($sql_candi);
+      while ($candi = $res_candi->fetch_assoc()) {
+        $candi_item = $candi['item'];
+        $candi_id = $candi['candi_id'];
+echo <<< EOM
+      <tr>
+        <td>{$candi_item}</td>
+      </tr>
+EOM;
+      }
+  ?>
+  </tbody>
+</table>
+
 
 <h2 id="heading2">場所</h2>
 <p>
@@ -82,9 +102,8 @@ $event_id = '';
   ?>
 </p>
 
-
 <p>
-  <input type="submit">
+  <input type="button" value="参加登録" onClick="location.href='./regist_party.php?id=<?php echo $event_id ?>'">
 </p>
 </form>
 
