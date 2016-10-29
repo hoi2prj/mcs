@@ -8,14 +8,35 @@ $db = new Pdodb();
 //GETデータ処理
 if ($_SERVER['REQUEST_METHOD']==='GET'){
   $event_id = $_GET['id'];
-  $sql_event = "SELECT * FROM candi WHERE event_id = '$event_id'";
+  $sql_event = "SELECT * FROM event WHERE event_id = '$event_id'";
 
   //イベントデータ参照
   $res_event = $db->SendSql($sql_event);
 
-  if ($res_event == FALSE){
+  if ($res_event != FALSE){
+      while ($event = $res_event->fetch_assoc()) {
+        $event_name = $event['event_name'];
+        $place = $event['place'];
+        $comment = $event['comment'];
+      }
+  } else {
     die('query error');
   }
+
+  $sql_candi = "SELECT item FROM candi WHERE event_id = '$event_id'";
+
+  //イベントデータ参照
+  $res_candi = $db->SendSql($sql_candi);
+
+  $date_val = '';
+  if ($res_candi != FALSE){
+      while ($candi = $res_candi->fetch_assoc()) {
+        $date_val = $date_val.$candi['item']."\r\n";
+      }
+  } else {
+    die('query error');
+  }
+
 }
 
 //POSTデータ処理
@@ -72,13 +93,13 @@ $(function() {
 <h2 id="heading2">イベント</h2>
 <p>
 <form action="../api/regist_event.php" method="post">
-<textarea id="event" name="event_name" cols="40" rows="4" maxlength="20" placeholder="イベント名を入力してください"></textarea>
+<textarea id="event" name="event_name" cols="40" rows="4" maxlength="20" placeholder="イベント名を入力してください"><?php print $event_name; ?></textarea>
 </p>
 
 <h2 id="heading2">日時</h2>
 
 <p>
-<textarea name="item" cols="40" rows="4" placeholder="日時を入力してください" id="date_val"/></textarea>
+<textarea name="item" cols="40" rows="4" placeholder="日時を入力してください" id="date_val"/><?php print $date_val; ?></textarea>
 </p>
 
 <div id="datepicker"></div>
@@ -86,11 +107,11 @@ $(function() {
 <p>
 <h2 id="heading2">場所</h2>
 <p>
-<textarea id="place" name="place" cols="40" rows="4" maxlength="20" placeholder="場所を入力してください"></textarea>
+<textarea id="place" name="place" cols="40" rows="4" maxlength="20" placeholder="場所を入力してください"><?php print $place; ?></textarea>
 </p>
 
 <h2 id="heading2">コメント</h2>
-<textarea id="comment" name="comment" cols="40" rows="4" maxlength="30" placeholder="コメントを入力してください"></textarea>
+<textarea id="comment" name="comment" cols="40" rows="4" maxlength="30" placeholder="コメントを入力してください"><?php print $comment; ?></textarea>
 </p>
 
 <p>
