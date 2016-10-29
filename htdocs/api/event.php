@@ -19,7 +19,8 @@ $candi_id = '';
   $db = new Pdodb();
 
   $sql_event = "SELECT * FROM event WHERE event_id = '$event_id'";
-  $sql_candi = "SELECT * FROM candi WHERE event_id = '$event_id'";
+//  $sql_candi = "SELECT * FROM candi WHERE event_id = '$event_id'";
+  $sql_party_status = "select ps.candi_id, c.item, count(ps.prop = 1 or null) as maru, count(ps.prop = 2 or null) as sankaku, count(ps.prop = 3 or null) as batsu from party_status as ps inner join candi as c on ps.event_id = c.event_id and ps.candi_id = c.candi_id where ps.event_id = '$event_id' group by ps.candi_id";
 
   //イベントデータ参照
   $res_event = $db->SendSql($sql_event);
@@ -77,13 +78,25 @@ $candi_id = '';
   </tr>
 <?php
       //日時データ参照
-  $res_candi = $db->SendSql($sql_candi);
-      while ($candi = $res_candi->fetch_assoc()) {
-        $candi_item = $candi['item'];
-        $candi_id = $candi['candi_id'];
+//  $res_candi = $db->SendSql($sql_candi);
+//      while ($candi = $res_candi->fetch_assoc()) {
+//        $candi_item = $candi['item'];
+//        $candi_id = $candi['candi_id'];
+
+      //データ参照
+  $res_party_status = $db->SendSql($sql_party_status);
+      while ($party = $res_party_status->fetch_assoc()) {
+        $party_item = $party['item'];
+        $party_maru = $party['maru'];
+        $party_sankaku = $party['sankaku'];
+        $party_batu = $party['batu'];
+
 echo <<< EOM
       <tr>
-        <td>{$candi_item}</td>
+      <td>{$party_item}</td>
+      <td>{$party_maru}</td>
+      <td>{$party_sankaku}</td>
+      <td>{$party_batu}</td>
       </tr>
 EOM;
       }
