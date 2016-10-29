@@ -89,14 +89,14 @@ $candi_id = '';
         $party_item = $party['item'];
         $party_maru = $party['maru'];
         $party_sankaku = $party['sankaku'];
-        $party_batu = $party['batu'];
+        $party_batsu = $party['batsu'];
 
 echo <<< EOM
       <tr>
       <td>{$party_item}</td>
       <td>{$party_maru}</td>
       <td>{$party_sankaku}</td>
-      <td>{$party_batu}</td>
+      <td>{$party_batsu}</td>
       </tr>
 EOM;
       }
